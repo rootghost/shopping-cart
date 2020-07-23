@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+   <title>Shopping Cart</title>
+   <meta charset="utf-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1">
+   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.css" rel="stylesheet" />
+   <link href="style.css" rel="stylesheet">
+</head>
+
+<body>
+
+   <section>
+      <div class="container">
+         <div class="cart">
+            <div class="col-md-12 col-lg-10 mx-auto">
+               <div class="cart-item" id="cart-1">
+                  <div class="row">
+                     <div class="col-md-7 center-item">
+                        <img src="images/product-1.png" alt="">
+                        <h5>iPhone 11 128GB Black</h5>
+                     </div>
+
+                     <div class="col-md-5 center-item">
+                        <div class="input-group number-spinner">
+                           <button id="mobile-minus" class="btn btn-default"><i class="fas fa-minus"></i></button>
+                           <input id="mobile-input" type="text" class="form-control text-center" value="0">
+                           <button id="mobile-plus" class="btn btn-default"><i class="fas fa-plus"></i></button>
+                        </div>
+                        <h5>$<span id="mobile-price">00</span></h5>
+                        <img id="remove-1" src="images/remove.png" alt="" class="remove-item">
+                     </div>
+                  </div>
+               </div>
+
+               <div class="cart-item" id="cart-2">
+                  <div class="row">
+                     <div class="col-md-7 center-item mx-auto">
+                        <img src="images/product-2.png" alt="">
+                        <h5>iPhone 11 Silicone Case - Black</h5>
+                     </div>
+                     <div class="col-md-5 center-item">
+                        <div class="input-group number-spinner">
+                           <button id="casing-minus" class="btn btn-default"><i class="fas fa-minus"></i></button>
+                           <input id="casing-input" type="text" class="form-control text-center" value="0">
+                           <button id="casing-plus" class="btn btn-default"><i class="fas fa-plus"></i></button>
+
+                        </div>
+                        <h5>$<span id="casing-price">00</span></h5>
+                        <img id="remove-2" src="images/remove.png" alt="" class="remove-item">
+                     </div>
+                  </div>
+               </div>
+
+               <div class="cart-item">
+                  <div class="row">
+
+                     <div class="col-md-8">
+                        <h5>Subtotal: </h5>
+                        <h5>Tax:</h5>
+                        <h5>Total:</h5>
+                     </div>
+
+                     <div class="col-md-4 status">
+                        <h5>$<span class="sub-total">00</span></h5>
+                        <h5>$0</h5>
+                        <h5>$<span class="sub-total">00</span></h5>
+                     </div>
+                  </div>
+               </div>
+               <div class="col-md-12 pt-4 pb-4">
+                  <button type="button" class="btn btn-success check-out">Check Out</button>
+               </div>
+            </div>
+         </div>
+      </div>
+   </section>
+   <script>
+      //mobile event handler for plus
+      const mblplus=document.getElementById("mobile-plus");
+      mblplus.addEventListener('click',function(){
+         Quantity("mobile-input",1);
+         price("mobile-price",1219);
+         subTotal("sub-total",1219);
+      })
+
+      //for minus
+
+      const mblminus=document.getElementById("mobile-minus");
+      mblminus.addEventListener('click',function(){
+         Quantity("mobile-input",-1);
+         price("mobile-price",-1219);
+         subTotal("sub-total",-1219);
+      })
+
+      //casing event handler for plus
+      const Casingplus=document.getElementById("casing-plus");
+      Casingplus.addEventListener('click',function(){
+         Quantity("casing-input",1);
+         price("casing-price",59);
+         subTotal("sub-total",59);
+      })
+
+      //cassing event handler for minus
+      const Casingminus=document.getElementById("casing-minus");
+      Casingminus.addEventListener('click',function(){
+         Quantity("casing-input",-1);
+         price("casing-price",-59);
+         subTotal("sub-total",-59);
+      })
+
+      document.getElementById("remove-1").addEventListener('click',function(){
+         remove("cart-1");
+      })
+
+      document.getElementById("remove-2").addEventListener('click',function(){
+         remove("cart-2");
+      })
+
+
+      //function mobile quantity
+      function Quantity(id,quantity){
+         const mblQuant=document.getElementById(id).value;
+         const quant=parseFloat(mblQuant);
+         const newQuant=quant+quantity;
+         document.getElementById(id).value=newQuant;
+      }
+      //fn price
+      function price(id,tk){
+         const mblPrice=document.getElementById(id).innerText
+         const mbltk=parseFloat(mblPrice);
+         document.getElementById(id).innerText=mbltk+tk;
+
+      }
+      //sub total
+      function subTotal(id,tk){
+         const sub=document.getElementsByClassName(id);
+         for(var i=0;i<sub.length;i++){
+            const float=parseFloat(sub[i].innerText);
+            sub[i].innerText=float+tk;
+         }
+      }
+
+      function remove(id){
+         const cart=document.getElementById(id)
+         cart.style.display='none';
+      }
+
+
+   </script>
+</body>
+
+</html>
